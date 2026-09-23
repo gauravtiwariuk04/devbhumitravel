@@ -1,0 +1,237 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                  url('https://picsum.photos/1920/1080') no-repeat center center/cover;
+      padding: 20px;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .full-width {
+      grid-column: span 2;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-group label {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #444;
+    }
+
+    .input-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-box i {
+      position: absolute;
+      left: 12px;
+      color: #666;
+    }
+
+    .input-box input,
+    .input-box select {
+      width: 100%;
+      padding: 10px 10px 10px 38px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+
+    .input-box input:focus,
+    .input-box select:focus {
+      border-color: #4A90E2;
+    }
+
+    .gender-options {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      height: 40px;
+    }
+
+    .gender-options label {
+      font-weight: normal;
+      margin-bottom: 0;
+      cursor: pointer;
+    }
+
+    .gender-options input {
+      margin-right: 5px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #4A90E2;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      background-color: #357ABD;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .full-width {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Registration Form</h2>
+    <!-- Added enctype="multipart/form-data" below -->
+    <form action="/Registeruserdataupdate" method="POST" >
+      <div class="form-grid">
+        <% usersList.forEach(user => { %>
+        <div class="input-group">
+          <input type=""  name="id" value="<%= user.id %>"
+          <label for="username">User Name</label>
+          <div class="input-box">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="username" name="username" placeholder="Enter username" value="<%= user.username %>" >
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="email">Email</label>
+          <div class="input-box">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" id="email" name="email" placeholder="Enter email" value="<%= user.email %>">
+          </div>
+        </div>
+
+        <div class="input-group full-width">
+          <label for="address">Address</label>
+          <div class="input-box">
+            <i class="fa-solid fa-location-dot"></i>
+            <input type="text" id="address" name="address" placeholder="Enter full address" value="<%= user.address %>">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="phone">Phone No</label>
+          <div class="input-box">
+            <i class="fa-solid fa-phone"></i>
+            <input type="tel" id="phone" name="phone" placeholder="Enter phone number" value="<%= user.phone %>">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Gender</label>
+          <div class="gender-options">
+            <label><input type="radio" name="gender" value="male" > Male</label>
+            <label><input type="radio" name="gender" value="female"> Female</label>
+            <label><input type="radio" name="gender" value="other"> Other</label>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="state">State</label>
+          <div class="input-box">
+            <i class="fa-solid fa-map"></i>
+            <select id="state" name="state">
+              <option value="" disabled selected>Select State</option>
+              <option value="California">California</option>
+              <option value="Texas">Texas</option>
+              <option value="New York">New York</option>
+              <option value="Florida">Florida</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="profile_image">Upload Image</label>
+          <div class="input-box">
+            <i class="fa-solid fa-image"></i>
+            <input type="file" id="profile_image" name="profile_image" accept="image/*" >
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <div class="input-box">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="password" name="password" placeholder="Enter password" >
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="confirm_password">Confirm Password</label>
+          <div class="input-box">
+            <i class="fa-solid fa-key"></i>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password" >
+          </div>
+        </div>
+
+        <div class="full-width">
+          <button type="submit" class="submit-btn">Register</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+<% }) %>
+</body>
+</html>

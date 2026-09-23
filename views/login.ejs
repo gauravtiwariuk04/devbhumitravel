@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login · Social & Icons (fixed height, no scroll)</title>
+  <!-- Font Awesome 6 (free) for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ---------- RESET & GLOBAL ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      background: linear-gradient(145deg, #f6f9fc 0%, #e2eaf1 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    /* ---------- CARD ---------- */
+    .login-card {
+      background: #ffffff;
+      max-width: 420px;
+      width: 100%;
+      height: 500px;
+      border-radius: 32px;
+      padding: 2rem 2rem 1.8rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25),
+                  0 4px 12px 0 rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .login-card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* ---------- HEADER / ICON ---------- */
+    .login-icon {
+      text-align: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .login-icon .circle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      border-radius: 50%;
+      color: white;
+      font-size: 1.8rem;
+      box-shadow: 0 12px 18px -6px rgba(26, 67, 113, 0.4);
+    }
+
+    .login-card h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0b1e32;
+      text-align: center;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.1rem;
+    }
+
+    .subhead {
+      text-align: center;
+      color: #5b6f82;
+      font-size: 0.9rem;
+      margin-bottom: 1.3rem;
+      font-weight: 400;
+      border-bottom: 1px solid #e4eef7;
+      padding-bottom: 1rem;
+    }
+
+    /* ---------- FORM & INPUT FIELDS ---------- */
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .input-group i {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #7a8f9f;
+      font-size: 1.1rem;
+      transition: color 0.2s;
+      pointer-events: none;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 0.9rem 1rem 0.9rem 3.2rem;
+      border: 2px solid #e2ecf5;
+      border-radius: 18px;
+      font-size: 1rem;
+      background: #f9fdff;
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+      color: #1b2a3a;
+      font-weight: 500;
+    }
+
+    .input-group input::placeholder {
+      color: #99aebb;
+      font-weight: 400;
+    }
+
+    .input-group input:focus {
+      border-color: #1e3c72;
+      background: #ffffff;
+      box-shadow: 0 8px 18px -8px rgba(30, 60, 114, 0.3);
+    }
+
+    .input-group input:focus + i {
+      color: #1e3c72;
+    }
+
+    /* ---------- FORGOT PASSWORD ---------- */
+    .forgot-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1.2rem;
+    }
+
+    .forgot-row a {
+      color: #4b6b8a;
+      font-size: 0.85rem;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dashed #b7cfdf;
+      transition: color 0.2s, border 0.2s;
+    }
+
+    .forgot-row a:hover {
+      color: #0f2b4a;
+      border-bottom-color: #0f2b4a;
+    }
+
+    /* ---------- LOGIN BUTTON ---------- */
+    .btn-login {
+      width: 100%;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      border: none;
+      border-radius: 18px;
+      padding: 0.9rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 12px 20px -8px #1e3c72b0;
+      transition: all 0.2s ease;
+      letter-spacing: 0.3px;
+      margin-bottom: 1.3rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-login i {
+      font-size: 1.2rem;
+    }
+
+    .btn-login:hover {
+      background: linear-gradient(135deg, #15315f, #1f3f73);
+      box-shadow: 0 16px 24px -8px #1e3c72cc;
+      transform: scale(1.01);
+    }
+
+    .btn-login:active {
+      transform: scale(0.98);
+      box-shadow: 0 6px 12px -6px #1e3c72;
+    }
+
+    /* ---------- SOCIAL DIVIDER ---------- */
+    .social-divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #8fa6b9;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      gap: 0.75rem;
+    }
+
+    .social-divider::before,
+    .social-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c7dae8, transparent);
+    }
+
+    /* ---------- SOCIAL ICONS ---------- */
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.2rem;
+    }
+
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: #ffffff;
+      border-radius: 16px;
+      color: #3e5b7a;
+      font-size: 1.4rem;
+      text-decoration: none;
+      box-shadow: 0 8px 16px -6px rgba(0, 0, 0, 0.12);
+      transition: all 0.25s ease;
+      border: 1px solid #deecf5;
+    }
+
+    /* individual brand hover colors */
+    .social-icon:nth-child(1):hover {   /* Facebook */
+      background: #1877f2;
+      color: white;
+      border-color: #1877f2;
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 14px 20px -8px #1877f2;
+    }
+
+    .social-icon:nth-child(2):hover {   /* Google */
+      background: #db4437;
+      color: white;
+      border-color: #db4437;
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 14px 20px -8px #db4437;
+    }
+
+    .social-icon:nth-child(3):hover {   /* Twitter/X */
+      background: #000000;
+      color: white;
+      border-color: #000000;
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 14px 20px -8px #000000;
+    }
+
+    .social-icon:nth-child(4):hover {   /* LinkedIn */
+      background: #0a66c2;
+      color: white;
+      border-color: #0a66c2;
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 14px 20px -8px #0a66c2;
+    }
+
+    /* ---------- FOOTER NOTE ---------- */
+    .footer-note {
+      text-align: center;
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      color: #6b859c;
+    }
+
+    .footer-note a {
+      color: #1e3c72;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border 0.2s;
+    }
+
+    .footer-note a:hover {
+      border-bottom-color: #1e3c72;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 420px) {
+      .login-card {
+        padding: 1.5rem 1.3rem 1.3rem;
+        height: 500px;
+      }
+
+      .login-icon .circle {
+        width: 56px;
+        height: 56px;
+        font-size: 1.6rem;
+      }
+
+      .login-card h2 {
+        font-size: 1.6rem;
+      }
+
+      .social-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.3rem;
+        border-radius: 14px;
+      }
+
+      .social-icons {
+        gap: 0.8rem;
+      }
+
+      .btn-login {
+        font-size: 1rem;
+        padding: 0.8rem;
+      }
+    }
+
+    /* small extra safety for very short viewports */
+    @media (max-height: 560px) {
+      body {
+        align-items: flex-start;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+      .login-card {
+        height: 500px;
+        overflow: hidden;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <!-- Main icon (lock / user style) -->
+    <div class="login-icon">
+      <div class="circle">
+        <i class="fas fa-lock"></i>
+      </div>
+    </div>
+
+    <h2>Welcome back</h2>
+    <div class="subhead">sign in to continue</div>
+
+    <!-- FORM WRAPPING ALL INPUTS AND LOGIN BUTTON -->
+    <form class="login-form"  action="/userlogin" method="post" novalidate>
+      <!-- Email / username field with icon + name attribute -->
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" name="email" placeholder="Email address" autocomplete="email" required>
+      </div>
+
+      <!-- Password field with icon + name attribute -->
+      <div class="input-group">
+        <i class="fas fa-key"></i>
+        <input type="password" name="password" placeholder="Password" autocomplete="current-password" required>
+      </div>
+
+      <!-- Forgot password link -->
+      <div class="forgot-row">
+        <a href="#">Forgot password?</a>
+      </div>
+
+      <!-- Login button with icon – now inside form -->
+      <button class="btn-login" type="submit" name="login">
+        <i class="fas fa-arrow-right-to-bracket"></i> Log in
+      </button>
+
+      <!-- Social divider -->
+      <div class="social-divider">
+        <span>or continue with</span>
+      </div>
+
+      <!-- Social media icons (Facebook, Google, X/Twitter, LinkedIn) -->
+      <div class="social-icons">
+        <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-icon" aria-label="Google"><i class="fab fa-google"></i></a>
+        <a href="#" class="social-icon" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+
+      <!-- Optional footer note (added inside form for spacing) -->
+      <div class="footer-note">
+        Don’t have an account? <a href="#">Sign up</a>
+      </div>
+    </form>
+  </div>
+
+  
+  
+</body>
+</html>
